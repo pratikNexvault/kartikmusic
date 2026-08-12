@@ -1,0 +1,18 @@
+#
+# Copyright (C) 2026-present by Sora Music.
+#
+# This file is part of the < https://github.com/pratikNexvault/kartikmusic > project.
+#
+
+.env
+.cache
+log.txt
+.DS_Store
+venv/
+.venv/
+cache/
+downloads/
+__pycache__/
+KartikMusic/cookies/*.txt
+*.session
+*.session-journal
