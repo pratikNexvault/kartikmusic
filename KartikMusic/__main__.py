@@ -4,7 +4,6 @@
 # This file is part of the < https://github.com/pratikNexvault/kartikmusic > project.
 #
 
-import asyncio
 import importlib
 
 from KartikMusic import Kartik, app, config, db, logger, stop, thumb, userbot, yt
