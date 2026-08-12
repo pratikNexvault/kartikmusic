@@ -5,6 +5,7 @@
 #
 
 import importlib
+import traceback
 
 from KartikMusic import Kartik, app, config, db, logger, stop, thumb, userbot, yt
 from KartikMusic.plugins import all_modules
@@ -28,6 +29,20 @@ async def startup():
     app.sudoers.update(sudoers)
     app.bl_users.update(await db.get_blacklisted())
     logger.info(f"Loaded {len(app.sudoers)} sudo users.")
+
+    # Debug: check dispatcher state
+    logger.info(f"Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}")
+    logger.info(f"Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}")
+    
+    # Add exception handler for background tasks
+    def handle_exception(loop, context):
+        logger.error(f"Background task exception: {context}")
+        if "exception" in context:
+            logger.error(f"Exception: {context['exception']}")
+            traceback.print_exception(type(context['exception']), context['exception'], context['exception'].__traceback__)
+    
+    loop = asyncio.get_running_loop()
+    loop.set_exception_handler(handle_exception)
 
 
 async def shutdown():
