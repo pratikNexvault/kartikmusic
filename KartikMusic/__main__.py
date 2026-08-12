@@ -4,6 +4,7 @@
 # This file is part of the < https://github.com/pratikNexvault/kartikmusic > project.
 #
 
+import asyncio
 import importlib
 import traceback
 
@@ -30,7 +31,8 @@ async def startup():
     app.bl_users.update(await db.get_blacklisted())
     logger.info(f"Loaded {len(app.sudoers)} sudo users.")
 
-    # Debug: check dispatcher state
+    print(f"[DEBUG] Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}", flush=True)
+    print(f"[DEBUG] Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}", flush=True)
     logger.info(f"Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}")
     logger.info(f"Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}")
 
@@ -47,6 +49,7 @@ async def startup():
 
     loop = asyncio.get_running_loop()
     loop.set_exception_handler(handle_exception)
+    print("[DEBUG] Exception handler set", flush=True)
 
 
 async def shutdown():
