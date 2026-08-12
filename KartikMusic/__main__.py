@@ -33,14 +33,18 @@ async def startup():
     # Debug: check dispatcher state
     logger.info(f"Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}")
     logger.info(f"Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}")
-    
+
     # Add exception handler for background tasks
     def handle_exception(loop, context):
         logger.error(f"Background task exception: {context}")
         if "exception" in context:
             logger.error(f"Exception: {context['exception']}")
-            traceback.print_exception(type(context['exception']), context['exception'], context['exception'].__traceback__)
-    
+            traceback.print_exception(
+                type(context["exception"]),
+                context["exception"],
+                context["exception"].__traceback__,
+            )
+
     loop = asyncio.get_running_loop()
     loop.set_exception_handler(handle_exception)
 
