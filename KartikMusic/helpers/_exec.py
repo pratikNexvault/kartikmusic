@@ -7,7 +7,6 @@
 import ast
 import os
 import traceback
-from typing import Optional
 
 
 async def meval(code: str, globs: dict, **kwargs):
@@ -92,7 +91,7 @@ async def meval(code: str, globs: dict, **kwargs):
             posonlyargs=[],
             args=[],
             vararg=None,
-            kwonlyargs=[ast.arg(arg=k) for k in kwargs.keys()],
+            kwonlyargs=[ast.arg(arg=k) for k in kwargs],
             kw_defaults=[None] * len(kwargs),
             kwarg=None,
             defaults=[],
@@ -116,7 +115,7 @@ async def meval(code: str, globs: dict, **kwargs):
 
 
 def format_exception(
-    exc: BaseException, tb: Optional[list[traceback.FrameSummary]] = None
+    exc: BaseException, tb: list[traceback.FrameSummary] | None = None
 ) -> str:
     """Format exception traceback into a readable string."""
     if tb is None:

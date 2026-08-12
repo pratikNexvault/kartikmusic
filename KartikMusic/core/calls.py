@@ -111,9 +111,7 @@ class TgCall(PyTgCalls):
         )
 
         try:
-            if seek_time:
-                await client.play(chat_id, stream)
-            elif await db.get_call(chat_id):
+            if seek_time or await db.get_call(chat_id):
                 await client.play(chat_id, stream)
             else:
                 await client.play(chat_id, stream)
