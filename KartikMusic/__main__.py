@@ -31,8 +31,14 @@ async def startup():
     app.bl_users.update(await db.get_blacklisted())
     logger.info(f"Loaded {len(app.sudoers)} sudo users.")
 
-    print(f"[DEBUG] Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}", flush=True)
-    print(f"[DEBUG] Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}", flush=True)
+    print(
+        f"[DEBUG] Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}",
+        flush=True,
+    )
+    print(
+        f"[DEBUG] Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}",
+        flush=True,
+    )
     logger.info(f"Dispatcher running: {getattr(app.dispatcher, 'running', 'N/A')}")
     logger.info(f"Dispatcher polling: {getattr(app.dispatcher, '_polling', 'N/A')}")
 
